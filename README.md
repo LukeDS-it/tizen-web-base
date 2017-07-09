@@ -16,6 +16,12 @@ referencing to tizen API)
 
 The basic config.xml has been taken directly from the tizen-cli.
 
+**Important!** It seems that the TAU that comes with the example apps
+of Tizen Studio was broken, several images were missing. I managed to
+recover an old version of it and created some other images myself.
+I will try to update the TAU framework when a new version comes out,
+hoping that the Tizen team realizes that advanced js tools exist.
+
 ## Requirements
 To use this scaffold you need to have installed npm or yarn.
 You'll also need to have the tizen studio installed in order to
@@ -40,3 +46,15 @@ This will generate the final application in the `build` directory.
 
 You can then use the `tizen-cli` to test the application and then build
 the final application distributable.
+
+Whole process on Linux:
+```
+yarn build
+cd build
+tizen package -t wgt -s <yourProfileName> -- ./
+tizen install -n <outputName> -t <deviceName> -- ./
+```
+
+You need to have defined the [signing certificate](https://developer.tizen.org/development/tizen-studio/web-tools/cli#Issue_tizen_cert)
+and the [signing profile](https://developer.tizen.org/development/tizen-studio/web-tools/cli#Manage_sec_prof)
+in order to install the package (it won't install otherwise).

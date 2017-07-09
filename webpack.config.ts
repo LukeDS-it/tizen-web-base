@@ -3,6 +3,7 @@ import * as path from 'path';
 import * as HtmlWebpackPlugin from 'html-webpack-plugin';
 import * as CopyWebpackPlugin from 'copy-webpack-plugin';
 import * as ExtractTextPlugin from 'extract-text-webpack-plugin';
+import UglifyJsPlugin = webpack.optimize.UglifyJsPlugin;
 
 const htmlWebpack = new HtmlWebpackPlugin({
     template: 'index.html',
@@ -19,12 +20,14 @@ const extractCss = new ExtractTextPlugin({
     filename: 'css/[name].css'
 });
 
+const uglify = new UglifyJsPlugin({compress: {warnings: false}});
+
 const config: webpack.Configuration = {
-    entry: ['./src/app.ts', './src/tau.js'],
+    entry: ['./src/app.ts'],
 
     output: {
         path: path.resolve(__dirname, 'build'),
-        filename: 'bundle.js'
+        filename: 'bundle.min.js'
     },
 
     resolve: {
@@ -38,7 +41,7 @@ const config: webpack.Configuration = {
             {
                 test: /\.scss/, use: ExtractTextPlugin.extract({
                 use: [
-                    {loader: 'css-loader'},
+                    {loader: 'css-loader', options: {minimize: true}},
                     {loader: 'sass-loader'}
                 ]
             })
@@ -52,7 +55,7 @@ const config: webpack.Configuration = {
     },
 
     plugins: [
-        copyFiles, extractCss, htmlWebpack
+        copyFiles, extractCss, htmlWebpack, uglify
     ]
 };
 
