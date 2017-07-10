@@ -29,6 +29,16 @@ actually test / build the final package.
 
 ## Usage
 
+### Configure
+Tizen wants your application to have a name, package and version.
+Name and version are interpolated by webpack, taking those
+defined in the `package.json` file.
+
+You can edit the `tizen-package` property in the `package.json` to
+use your custom package name.
+
+### Develop
+
 Develop your application code under the `src` directory, making sure
 to insert some bootstrapping code in the `app.ts` file.
 
@@ -38,7 +48,7 @@ TAU css is already included and if you wish to change the theme you
 can do so by editing the `default` theme to other TAU themes.
 (Possible values are `black`, `blue`, `brown`, `changeable`, `default`)
 
-## Build
+### Build
 
 To build the final distribution run `yarn build` or `npm run build`.
 
@@ -58,3 +68,8 @@ tizen install -n <outputName> -t <deviceName> -- ./
 You need to have defined the [signing certificate](https://developer.tizen.org/development/tizen-studio/web-tools/cli#Issue_tizen_cert)
 and the [signing profile](https://developer.tizen.org/development/tizen-studio/web-tools/cli#Manage_sec_prof)
 in order to install the package (it won't install otherwise).
+
+## License
+This starter pack is licensed under MIT license. The enclosed TAU
+(Tizen Advanced Ui) framework is licensed under the Flora license which
+you find enclosed in the repository.

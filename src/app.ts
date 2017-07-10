@@ -1,5 +1,6 @@
+require('./tau.js');
+require('../config.xml');
 require('../css/styles.scss');
-require('../src/tau.js');
 
 /*
  * This is where the main application logic goes.

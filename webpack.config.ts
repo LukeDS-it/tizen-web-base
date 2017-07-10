@@ -11,7 +11,6 @@ const htmlWebpack = new HtmlWebpackPlugin({
 });
 
 const copyFiles = new CopyWebpackPlugin([
-    {from: 'config.xml'},
     {from: 'icon.png'},
     {from: 'assets', to: 'assets'}
 ]);
@@ -37,7 +36,11 @@ const config: webpack.Configuration = {
     module: {
         loaders: [
             {test: /\.tsx?$/, loader: 'ts-loader', exclude: '/node-modules'},
-            {test: /^config\.xml$/, loader: 'file-loader', exclude: '/node-modules'},
+            {test: /config\.xml$/, use: [
+                {loader: 'file-loader?name=config.xml'},
+                {loader: 'extricate-loader'},
+                {loader: 'interpolate-loader'}
+            ]},
             {
                 test: /\.scss/, use: ExtractTextPlugin.extract({
                 use: [
